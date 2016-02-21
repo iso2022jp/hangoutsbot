@@ -39,7 +39,7 @@ def _handle_keyword(bot, event, command):
         try:
             if _internal.keywords[user.id_.chat_id] and not user.id_.chat_id in event.user.id_.chat_id:
                 for phrase in _internal.keywords[user.id_.chat_id]:
-                    regexphrase = "\\b" + phrase + "\\b"
+                    regexphrase = "(\\b|(\u3055\u3093)|(\u304F\u3093)|\u3000|\u3001|\u3002)" + phrase
                     if re.search(regexphrase, event.text, re.IGNORECASE):
                         yield from _send_notification(bot, event, phrase, user)
         except KeyError:
