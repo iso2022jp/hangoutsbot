@@ -14,11 +14,14 @@ logger = logging.getLogger(__name__)
 
 _externals = { "running": False }
 
+# Original:
+# "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/534.34  "
+# "(KHTML, like Gecko) PhantomJS/1.9.7 Safari/534.34"
 
 dcap = dict(DesiredCapabilities.PHANTOMJS)
 dcap["phantomjs.page.settings.userAgent"] = (
-    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/534.34  "
-    "(KHTML, like Gecko) PhantomJS/1.9.7 Safari/534.34"
+    "Mozilla/5.0 (Linux; U; Android 4.1.1; ja-jp; Galaxy Nexus Build/JRO03H) AppleWebKit/534.30 "
+    "(KHTML, like Gecko) Version/4.0 Mobile Safari/534.30"
 )
 
 
@@ -36,7 +39,8 @@ def _open_file(name):
 @asyncio.coroutine
 def _screencap(browser, url, filename):
     logger.info("screencapping {} and saving as {}".format(url, filename))
-    browser.set_window_size(1280, 800)
+#    browser.set_window_size(1280, 800)
+    browser.set_window_size(320, 480)
     browser.get(url)
     yield from asyncio.sleep(5)
     loop = asyncio.get_event_loop()
