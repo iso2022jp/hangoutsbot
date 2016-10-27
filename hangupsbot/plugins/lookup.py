@@ -41,7 +41,7 @@ def lookup(bot, event, *args):
     html = urllib.request.urlopen(spreadsheet_url).read()
 
     keyword_raw = keyword.strip().lower()
-    keyword_ascii = unicode_to_ascii(keyword_raw)
+    keyword_ascii = unicode_to_ascii(keyword_raw).strip()
 
     data = []
 
@@ -65,8 +65,7 @@ def lookup(bot, event, *args):
         for cell in row:
             cellcontent_raw = str(cell).lower().strip()
             cellcontent_ascii = unicode_to_ascii(cellcontent_raw)
-
-            if keyword_raw in cellcontent_raw or keyword_ascii in cellcontent_ascii:
+            if keyword_raw in cellcontent_raw or (keyword_ascii and keyword_ascii in cellcontent_ascii):
                 if counter < counter_max:
                     htmlmessage += _('<br />Row {}: ').format(counter+1)
                     for datapoint in row:
